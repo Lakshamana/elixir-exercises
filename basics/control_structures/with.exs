@@ -13,6 +13,7 @@ result = case Repo.insert(changeset) do
     error
 end
 
+# this
 same_as_result = 
   with {:ok, user} <- Repo.insert(changeset),
        {:ok, token, full_claims} <- Guardian.encode_and_sign(user, :token, claims) do
