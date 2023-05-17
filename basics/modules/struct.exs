@@ -1,4 +1,5 @@
 defmodule Example.User do
+  @derive {Inspect, only: [:name]}  #  except: [:roles] -- equivalent
   defstruct name: "John", roles: []
 end
 
