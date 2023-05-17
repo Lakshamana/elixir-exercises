@@ -13,15 +13,30 @@ IO.puts(last([1, 2, 3, 4]))
 
 # ---- import functions --------
 defmodule ExampleUse do
-  defmacro __using__(_opts) do
+  defmacro __using__(opts) do
+    greeting = Keyword.get(opts, :greeting, "Hi")
     quote do
-      def hello(name), do: "Hello, #{name}"
+      def hello(name), do: "#{unquote(greeting)}, #{name}"
     end
   end
 end
 
-defmodule ExampleUseTest do
+defmodule ExampleUseTestHello do
   use ExampleUse
 end
 
-IO.puts(ExampleUseTest.hello("John"))
+defmodule ExampleUseTestHola do
+  use ExampleUse, greeting: "Hola"
+end
+
+defmodule ExampleUseTestPrivet do
+    use ExampleUse, greeting: "Привет"
+end
+
+defmodule ExampleUseTestNiHao do
+    use ExampleUse, greeting: "你好"
+end
+
+IO.puts(ExampleUseTestHello.hello("John"))
+IO.puts(ExampleUseTestHola.hello("John"))
+IO.puts(ExampleUseTestNiHao.hello("John"))
