@@ -1,4 +1,4 @@
-handle_result = fn 
+handle_result = fn
   {:ok, result} -> IO.puts("Handling result: #{result}")
   {:ok, _} -> IO.puts("This will never run")
   {:error} -> IO.puts("An error has occurred! Please try again")
