@@ -19,6 +19,15 @@ defmodule Example2 do
       {:EXIT, from_pid, reason} -> IO.puts("Exited from #{inspect(from_pid)} with reason: #{reason}")
     end
   end
+
+  def run_monit do
+    spawn_monitor(Example2, :explode, [])
+
+    receive do
+      {:DOWN, _ref, :process, _pid, reason} -> IO.puts("Exit reason: #{reason}")
+    end
+  end
 end
 
-Example2.run
+# Example2.run
+Example2.run_monit
